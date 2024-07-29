@@ -1,18 +1,25 @@
 package com.sharing.expense.ExpenseSharing.ExpenseEntity;
-
-
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.*;
+
+
+
+/*
+Structure for Expense Table
+
+ID             |    name           |     email      |    phonenumber      |     password
+               |                   |                |                     |
+
+*/
+
 
 @Entity
 @Table(name = "user_table")
 @Data
 @NoArgsConstructor
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int ID ;

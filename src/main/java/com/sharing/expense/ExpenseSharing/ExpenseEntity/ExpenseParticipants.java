@@ -1,9 +1,16 @@
 package com.sharing.expense.ExpenseSharing.ExpenseEntity;
-
-
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+
+/*
+Structure for Expense_Participants Table
+
+participant_id     |    amount         |     split      |    expense_id(expense table)       |     participant_user_id(user table)
+                   |                   |                |                                    |
+
+*/
 
 @NoArgsConstructor
 @Data

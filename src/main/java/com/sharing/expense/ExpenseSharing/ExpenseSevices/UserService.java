@@ -1,22 +1,14 @@
 package com.sharing.expense.ExpenseSharing.ExpenseSevices;
-
-
-import com.sharing.expense.ExpenseSharing.DummyClasses.CalculateUsingDivisionType;
 import com.sharing.expense.ExpenseSharing.DummyClasses.LoginAttributes;
-import com.sharing.expense.ExpenseSharing.ExpenseEntity.Expense;
-import com.sharing.expense.ExpenseSharing.ExpenseEntity.ExpenseParticipants;
 import com.sharing.expense.ExpenseSharing.ExpenseEntity.User;
-import com.sharing.expense.ExpenseSharing.ExpenseRepository.ExpenseRepository;
-import com.sharing.expense.ExpenseSharing.ExpenseRepository.UserRepository;
+import com.sharing.expense.ExpenseSharing.ExpenseRepository.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
+
+//All the logic related to login and registration is here.
 
 @Service
 public class UserService {
@@ -31,9 +23,6 @@ public class UserService {
     @Autowired
     private HttpSession session ;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder ;
-
 
     public String userRegistration(Map<String,Object> post) {
             String username = (String) post.get("username");
@@ -45,7 +34,7 @@ public class UserService {
             user.setName(username);
             user.setEmail(email);
             user.setPhoneNo(phoneNo);
-            user.setPassword(passwordEncoder.encode(password));
+            user.setPassword(password);
 
             userJPA.save(user);
 
@@ -59,7 +48,7 @@ public class UserService {
         User user = userJPA.findByEmail(email) ;
         if(user == null) return "Login Unsuccessful";
 
-        if(passwordEncoder.matches(password , user.getPassword())){
+        if(password.equals(user.getPassword())){
             session.setAttribute("username" , user.getName());
             return "Login Successful";
         }

@@ -15,6 +15,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-jpa:3.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-aop:3.3.2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aop:6.1.11" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.9.22.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-jdbc:3.3.2" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:5.1.0" level="project" />
@@ -103,11 +104,5 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-core:6.1.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:6.1.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.9.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-security:3.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-aop:6.1.11" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:6.3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:6.3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:6.3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:6.3.1" level="project" />
   </component>
 </module>

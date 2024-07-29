@@ -6,6 +6,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/*
+Structure for Expense Table
+
+expense_ID     |    description    |     amount     |    divisionType     |     createdBy(forign key from user)
+               |                   |                |                     |
+
+*/
+
+
 @Data
 @Entity
 @Table(name = "expense_table")

@@ -1,14 +1,13 @@
 package com.sharing.expense.ExpenseSharing.ExpenseSevices;
 import com.sharing.expense.ExpenseSharing.DummyClasses.CalculateUsingDivisionType;
-import com.sharing.expense.ExpenseSharing.ExpenseEntity.Expense;
-import com.sharing.expense.ExpenseSharing.ExpenseEntity.ExpenseParticipants;
-import com.sharing.expense.ExpenseSharing.ExpenseEntity.User;
-import com.sharing.expense.ExpenseSharing.ExpenseRepository.ExpenseRepository;
-import com.sharing.expense.ExpenseSharing.ExpenseRepository.UserRepository;
+import com.sharing.expense.ExpenseSharing.ExpenseEntity.*;
+import com.sharing.expense.ExpenseSharing.ExpenseRepository.* ;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+//All the logic related to expense is handled by this class
+
 
 @Service
 public class ExpenseService {
@@ -63,20 +62,17 @@ public class ExpenseService {
     }
 
     public List<Expense> getExpense() {
+
         return expenseJPA.findAll() ;
     }
 
 
-
     public List<Expense> getIndividualExpense(String username){
         User user = userJPA.findByName(username) ;
-        if(user == null){
-            throw new RuntimeException("User Not Found") ;
+        if(user == null) {
+            throw new RuntimeException("User Not Found");
         }
-
         return expenseJPA.findByCreatedBy(user) ;
-
-
     }
 }
 

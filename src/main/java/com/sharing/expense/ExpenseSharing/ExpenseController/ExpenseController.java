@@ -1,26 +1,19 @@
 package com.sharing.expense.ExpenseSharing.ExpenseController;
-
-
-import com.sharing.expense.ExpenseSharing.ExpenseEntity.Expense;
-import com.sharing.expense.ExpenseSharing.ExpenseEntity.ExpenseParticipants;
-import com.sharing.expense.ExpenseSharing.ExpenseEntity.User;
+import com.sharing.expense.ExpenseSharing.ExpenseEntity.*;
 import com.sharing.expense.ExpenseSharing.ExpenseSevices.ExpenseService;
-import com.sharing.expense.ExpenseSharing.ExpenseSevices.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/expense")
 public class ExpenseController {
 
     @Autowired
     ExpenseService service ;
 
+
+    // Endpoint to add expense
     @PostMapping("/addExpense")
     public Map<String, String> addExpense(@RequestBody Map<String, Object> request) {
         String description = (String) request.get("description");
@@ -59,12 +52,15 @@ public class ExpenseController {
     }
 
 
+
+    //Endpoint for retrival of the expenses by all user
     @GetMapping("/allexpense")
     List<Expense> getExpense(){
         return service.getExpense();
     }
 
 
+    //Endpoint to get expense by username
     @GetMapping("/user/{username}")
     List<Expense> getIndividualExpense(@PathVariable String username){
         return service.getIndividualExpense(username);
