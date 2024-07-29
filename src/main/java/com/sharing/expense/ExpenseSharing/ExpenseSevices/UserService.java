@@ -30,8 +30,6 @@ public class UserService {
     @Autowired
     private HttpSession session ;
 
-    @Autowired
-    CalculateUsingDivisionType calculateDT ;
 
 
     public String userRegistration(Map<String,Object> post) {
@@ -68,50 +66,5 @@ public class UserService {
     boolean ValidUserOrNot(String username){
         if(username == null) return false;
         return true ;
-    }
-
-
-    public String addExpense(Expense expense, List<ExpenseParticipants> participants) {
-        String username = (String) session.getAttribute("username");
-        if (username == null) {
-            throw new RuntimeException("User is not logged in");
-        }
-        User user = userJPA.findByName(username);
-        if (user == null) {
-            throw new RuntimeException("User not found");
-        }
-
-        expense.setCreatedBy(user);
-        int size = participants.size() ;
-        double percentage = 0 ;
-        for (ExpenseParticipants participant : participants) {
-            participant.setExpense(expense);
-            if(expense.getDivisionType() == "PERCENTAGE"){
-                participant.setAmount(calculateDT.DivisionTypePERCENTAGE(expense.getAmount(), participant.getSplit()));
-                percentage += participant.getSplit();
-            }
-            else if(expense.getDivisionType() == "EQUAL"){
-                participant.setAmount(calculateDT.DivisionTypeEQUALSPLIT(expense.getAmount(), size));
-
-            }
-            User participantUser = userJPA.findByName(participant.getUser().getName());
-            if (participantUser != null) {
-                participant.setUser(participantUser);
-            } else {
-                throw new RuntimeException("Participant user not found: " + participant.getUser().getName());
-            }
-        }
-        if(percentage != (double)100){
-            throw new RuntimeException("Inappropriate Percentage ");
-        }
-
-        expense.setParticipants(participants);
-        expenseJPA.save(expense);
-        return "Expense added successfully";
-    }
-
-
-    public List<Expense> getExpense() {
-        return expenseJPA.findAll() ;
     }
 }

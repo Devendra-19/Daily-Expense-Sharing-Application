@@ -36,45 +36,5 @@ public class UserController {
 
     }
 
-    @PostMapping("/expense")
-    public Map<String, String> addExpense(@RequestBody Map<String, Object> request) {
-        String description = (String) request.get("description");
-        double amount = Double.parseDouble(request.get("amount").toString());
-        String divisionType = (String) request.get("DivisionType");
-        List<Map<String, Object>> participantsData = (List<Map<String, Object>>) request.get("participants");
 
-        Expense expense = new Expense();
-        expense.setDescription(description);
-        expense.setAmount(amount);
-        expense.setDivisionType(divisionType);
-
-        List<ExpenseParticipants> participants = participantsData.stream().map(p -> {
-            ExpenseParticipants participant = new ExpenseParticipants() ;
-            User participantUser = new User();
-            participantUser.setName((String) p.get("username"));
-            participant.setUser(participantUser);
-            if(divisionType == "PERCENTAGE"){
-                participant.setSplit((Double)p.get("split"));
-            }
-            else if(divisionType == "EXACT"){
-                participant.setAmount(Double.parseDouble(p.get("amount").toString()));
-                participant.setSplit(0);
-            }
-            else if(divisionType == "EQUAL"){
-                participant.setSplit(0);
-            }
-            return participant;
-        }).collect(Collectors.toList());
-
-        String message = service.addExpense(expense, participants);
-        Map<String, String> response = new HashMap<>();
-        response.put("message", message);
-        return response;
-    }
-
-
-    @GetMapping("/allexpense")
-    List<Expense> getExpense(){
-        return service.getExpense();
-    }
 }
