@@ -1,5 +1,6 @@
 package com.sharing.expense.ExpenseSharing.ExpenseController;
 import com.sharing.expense.ExpenseSharing.DummyClasses.LoginAttributes;
+import com.sharing.expense.ExpenseSharing.DummyClasses.UserWithoutPassword;
 import com.sharing.expense.ExpenseSharing.ExpenseEntity.User;
 import com.sharing.expense.ExpenseSharing.ExpenseSevices.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ public class UserController {
 
     // Endpoint to get the details of all the user
     @GetMapping("/alluser")
-    List<User> getAllUser(){
-        return service.getAlluser();
+    List<UserWithoutPassword> getAllUser(){
+        return service.getAlluser() ;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.sharing.expense.ExpenseSharing.ExpenseSevices;
 import com.sharing.expense.ExpenseSharing.DummyClasses.LoginAttributes;
+import com.sharing.expense.ExpenseSharing.DummyClasses.UserWithoutPassword;
 import com.sharing.expense.ExpenseSharing.ExpenseEntity.User;
 import com.sharing.expense.ExpenseSharing.ExpenseRepository.*;
 import jakarta.servlet.http.HttpSession;
@@ -60,7 +61,7 @@ public class UserService {
         return true ;
     }
 
-    public List<User> getAlluser() {
-        return userJPA.findAll() ;
+    public List<UserWithoutPassword> getAlluser() {
+        return userJPA.findAllUser() ;
     }
 }
