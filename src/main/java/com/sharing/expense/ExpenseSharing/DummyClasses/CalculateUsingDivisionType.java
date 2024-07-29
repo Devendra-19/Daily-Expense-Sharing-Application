@@ -1,5 +1,9 @@
 package com.sharing.expense.ExpenseSharing.DummyClasses;
 
+
+import org.springframework.stereotype.Component;
+
+@Component
 public class CalculateUsingDivisionType {
 
 

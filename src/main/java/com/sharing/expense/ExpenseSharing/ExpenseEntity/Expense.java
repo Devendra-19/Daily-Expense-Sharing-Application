@@ -19,7 +19,7 @@ public class Expense {
     private String divisionType ;
 
     @ManyToOne
-    @JoinColumn(name = "ID" , nullable = false)
+    @JoinColumn(name = "createdBy" , nullable = false)
     User createdBy ;
 
     @OneToMany(targetEntity = ExpenseParticipants.class , cascade = CascadeType.ALL , orphanRemoval = true)

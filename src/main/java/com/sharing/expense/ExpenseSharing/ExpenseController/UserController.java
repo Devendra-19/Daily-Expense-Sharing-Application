@@ -32,9 +32,12 @@ public class UserController {
     public String userLogin(@RequestBody LoginAttributes loginattributes){
 
         return service.userLogin(loginattributes) ;
-
-
     }
 
+
+    @GetMapping("/alluser")
+    List<User> getAllUser(){
+        return service.getAlluser();
+    }
 
 }

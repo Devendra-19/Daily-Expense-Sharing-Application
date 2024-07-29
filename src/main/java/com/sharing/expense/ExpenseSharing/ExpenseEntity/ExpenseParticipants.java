@@ -22,6 +22,6 @@ public class ExpenseParticipants {
     Expense expense ;
 
     @ManyToOne
-    @JoinColumn(name = "ID" , nullable = false)
+    @JoinColumn(name = "participant_user_id" , nullable = false)
     User user ;
 }

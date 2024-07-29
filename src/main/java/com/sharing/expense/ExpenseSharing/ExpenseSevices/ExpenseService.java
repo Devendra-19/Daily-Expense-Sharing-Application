@@ -6,29 +6,24 @@ import com.sharing.expense.ExpenseSharing.ExpenseEntity.User;
 import com.sharing.expense.ExpenseSharing.ExpenseRepository.ExpenseRepository;
 import com.sharing.expense.ExpenseSharing.ExpenseRepository.UserRepository;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class ExpenseService {
 
-    @Autowired
-    ExpenseRepository expenseJPA ;
+    private final ExpenseRepository expenseJPA;
+    private final UserRepository userJPA;
+    private final HttpSession session;
+    private final CalculateUsingDivisionType calculateDT;
 
-    @Autowired
-    UserRepository userJPA ;
-
-    @Autowired
-    private HttpSession session ;
-
-    @Autowired
-    CalculateUsingDivisionType calculateDT ;
-
+    public ExpenseService(ExpenseRepository expenseJPA, UserRepository userJPA, HttpSession session, CalculateUsingDivisionType calculateDT) {
+        this.expenseJPA = expenseJPA;
+        this.userJPA = userJPA;
+        this.session = session;
+        this.calculateDT = calculateDT;
+    }
 
     public String addExpense(Expense expense, List<ExpenseParticipants> participants) {
         String username = (String) session.getAttribute("username");

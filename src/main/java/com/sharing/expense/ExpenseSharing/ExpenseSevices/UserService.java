@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +31,8 @@ public class UserService {
     @Autowired
     private HttpSession session ;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder ;
 
 
     public String userRegistration(Map<String,Object> post) {
@@ -42,7 +45,7 @@ public class UserService {
             user.setName(username);
             user.setEmail(email);
             user.setPhoneNo(phoneNo);
-            user.setPassword(password);
+            user.setPassword(passwordEncoder.encode(password));
 
             userJPA.save(user);
 
@@ -56,15 +59,19 @@ public class UserService {
         User user = userJPA.findByEmail(email) ;
         if(user == null) return "Login Unsuccessful";
 
-        if(user.getPassword().equals(password)){
-            session.setAttribute("email", email);
+        if(passwordEncoder.matches(password , user.getPassword())){
+            session.setAttribute("username" , user.getName());
             return "Login Successful";
         }
-        return "Login Unsuccessful" ;
+        return "Login Unsuccessful";
     }
 
     boolean ValidUserOrNot(String username){
         if(username == null) return false;
         return true ;
+    }
+
+    public List<User> getAlluser() {
+        return userJPA.findAll() ;
     }
 }
